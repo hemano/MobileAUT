@@ -1,6 +1,7 @@
 package com.carousell.test;
 
 import manager.ParallelExecution;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Runner {
 
         ParallelExecution parallelExecution = new ParallelExecution();
 
-        parallelExecution.runner("com.carousell.test", tests);
+        boolean hasFailures = parallelExecution.runner("com.carousell.test", tests);
+        Assert.assertFalse(hasFailures, "Testcases have failed in parallel execution");
     }
 }

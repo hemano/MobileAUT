@@ -16,7 +16,8 @@ public class HomePage extends CommonPageActions {
     }
 
 
-    public void clickSell(){
+    public ChoosePhotosPage clickSell(){
         waitForPageToLoad(homePageObjects.sellBtn).click();
+        return new ChoosePhotosPage(driver);
     }
 }

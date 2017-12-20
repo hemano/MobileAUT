@@ -4,7 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import manager.AppiumDriverManager;
 
-public class UserBaseTest {
+public class BaseClass {
 
     public AppiumDriver<MobileElement> driver;
 

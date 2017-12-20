@@ -1,7 +1,9 @@
 package com.carousell.pages;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -9,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -18,14 +21,16 @@ public class CommonPageActions {
     private static final String ELEMENT_DISAPPEAR_TIMEOUT = "15";
     private static final String ELEMENT_APPEAR_TIMEOUT = "15";
 
-    public CommonPageActions(AppiumDriver<MobileElement> driver) { this.driver = driver; }
+    public CommonPageActions(AppiumDriver<MobileElement> driver) {
+        this.driver = driver;
+    }
 
-    public MobileElement waitForPageToLoad(WebElement id){
-        WebDriverWait wait = new WebDriverWait(driver, Long.valueOf(ELEMENT_APPEAR_TIMEOUT ));
+    public MobileElement waitForPageToLoad(WebElement id) {
+        WebDriverWait wait = new WebDriverWait(driver, Long.valueOf(ELEMENT_APPEAR_TIMEOUT));
         return (MobileElement) wait
                 .ignoring(Exception.class)
-                .pollingEvery(2, TimeUnit.SECONDS)
-                .until(ExpectedConditions.elementToBeClickable(id) );
+                .pollingEvery(100, TimeUnit.MILLISECONDS)
+                .until(ExpectedConditions.elementToBeClickable(id));
     }
 
 
@@ -73,4 +78,36 @@ public class CommonPageActions {
         driver.navigate().back(); //Closes keyboard
         //driver.navigate().back(); //Comes out of edit mode
     }
+
+    public boolean moveToElement(MobileElement element) {
+        int limit = 0;
+        while (!isExist(element).isPresent() && limit < 5) {
+            limit++;
+            new TouchAction((MobileDriver) driver).longPress(0, 0).moveTo(0, 100).release().perform();
+        }
+        if (limit == 5) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    public void scrollDown(int swipes) {
+        int limit = 0;
+        while (limit < swipes) {
+            limit++;
+            new TouchAction((MobileDriver) driver).longPress(0, 0).moveTo(0, 100).release().perform();
+        }
+    }
+
+    public Optional<MobileElement> isExist(MobileElement element) {
+        try {
+            element.isDisplayed();
+            return Optional.of(element);
+        } catch (NoSuchElementException e) {
+            return Optional.empty();
+        }
+    }
+
 }
