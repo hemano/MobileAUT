@@ -24,9 +24,11 @@ public class AndroidManager implements Manager {
      */
     public void startADB() throws IOException {
         String output = promptUtil.runCommandThroughProcess("adb start-server");
-        String[] lines = output.split("\n");
-        if (lines[0].contains("internal or external command")) {
-            System.out.println("Please set ANDROID_HOME in your system variables");
+        if(output != null){
+            String[] lines = output.split("\n");
+            if (lines[0].contains("internal or external command")) {
+                System.out.println("Please set ANDROID_HOME in your system variables");
+            }
         }
     }
 

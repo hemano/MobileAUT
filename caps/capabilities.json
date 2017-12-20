@@ -2,12 +2,11 @@
   {
     "android": {
       "platformName": "android",
-      "platformVersion": "7.0",
-      "app": "./build/wordpress.apk",
-      "appPackage":"org.wordpress.android",
-      "appActivity": "org.wordpress.android.ui.WPLaunchActivity",
       "deviceName": "android",
-      "noSign":true
+      "appPackage":"com.thecarousell.Carousell",
+      "appActivity": "com.thecarousell.Carousell.activities.EntryActivity",
+      "noSign":true,
+      "autoGrantPermissions": true
     }
   }
 ]

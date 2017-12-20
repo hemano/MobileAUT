@@ -1,9 +1,9 @@
 package manager;
 
-        import org.hamcrest.Matchers;
-        import org.testng.annotations.Test;
-        import java.io.IOException;
-        import static org.hamcrest.MatcherAssert.assertThat;
+import org.hamcrest.Matchers;
+import org.testng.annotations.Test;
+import java.io.IOException;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AppiumServerManagerTest {
 
