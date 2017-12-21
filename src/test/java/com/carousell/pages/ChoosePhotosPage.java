@@ -17,12 +17,12 @@ public class ChoosePhotosPage extends CommonPageActions {
 
 
     public CameraPage openCamera() {
-
         waitForPageToLoad(choosePhotosPageObjects.openCameraBtn).click();
         return new CameraPage(driver);
     }
 
     public ChoosePhotosPage selectPhoto() {
+        waitForListToLoad(choosePhotosPageObjects.picturesList);
         waitForPageToLoad(choosePhotosPageObjects.picturesList.get(0)).click();
         return this;
     }

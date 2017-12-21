@@ -5,7 +5,7 @@
         <listener class-name="manager.AppiumTestListener"/>
     </listeners>
     <test name="TestNG Test">
-        <parameter name="device" value="192.168.56.102:5555"/>
+        <parameter name="device" value="192.168.56.101:5555"/>
         <classes>
             <class name="com.carousell.test.CarousellTest"/>
         </classes>

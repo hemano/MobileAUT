@@ -23,15 +23,16 @@ public class ChooseCategoryPage extends CommonPageActions {
         return this;
     }
 
-    public void chooseSubCategory(String categoryName) {
+    public CompleteListingPage chooseSubCategory(String categoryName) {
         selectCategoryFromList(categoryName);
+
+        return new CompleteListingPage(driver);
     }
 
     private void selectCategoryFromList(String categoryName) {
         chooseCategoryPageObjects.categoriesList.stream().filter(e ->
                 e.getAttribute("text")
                 .equalsIgnoreCase(categoryName))
-                .findFirst()
-                .get().click();
+                .findFirst().get().click();
     }
 }

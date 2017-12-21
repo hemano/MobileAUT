@@ -4,13 +4,17 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.functions.ExpectedCondition;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.internal.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +23,7 @@ public class CommonPageActions {
     private static final Logger LOGGER = Logger.getLogger(CommonPageActions.class);
     public AppiumDriver driver;
     private static final String ELEMENT_DISAPPEAR_TIMEOUT = "15";
-    private static final String ELEMENT_APPEAR_TIMEOUT = "15";
+    private static final String ELEMENT_APPEAR_TIMEOUT = "30";
 
     public CommonPageActions(AppiumDriver<MobileElement> driver) {
         this.driver = driver;
@@ -30,7 +34,17 @@ public class CommonPageActions {
         return (MobileElement) wait
                 .ignoring(Exception.class)
                 .pollingEvery(100, TimeUnit.MILLISECONDS)
-                .until(ExpectedConditions.elementToBeClickable(id));
+                .until(ExpectedConditions.visibilityOf(id));
+    }
+
+    public boolean waitForListToLoad(List<MobileElement> list){
+         return new WebDriverWait(driver, 10)
+                .until(new ExpectedCondition<Boolean>() {
+                    @Override
+                    public Boolean apply(@Nullable WebDriver webDriver) {
+                        return list.size() > 1;
+                    }
+                });
     }
 
 
@@ -109,5 +123,7 @@ public class CommonPageActions {
             return Optional.empty();
         }
     }
+
+
 
 }
