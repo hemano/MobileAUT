@@ -13,7 +13,29 @@ For Windows:
 
 Instructions to execute the tests:
 
-Connecte the devices or open emulators
+Connect the devices or open emulators
 open terminal and execute below maven command
 
     mvn clean test -Dtest=Runner
+    
+User can keep the APK file in the "build" directory.
+
+The DesiredCapabilitie can be configured in "caps/capabilities.json" file as follows:
+
+    [
+      {
+        "android": {
+          "platformName": "android",
+          "deviceName": "android",
+          "appPackage":"com.thecarousell.Carousell",
+          "appActivity": "com.thecarousell.Carousell.activities.EntryActivity",
+          "noSign":true,
+          "autoGrantPermissions": true,
+          "newCommandTimeout": 10000
+          }
+      }
+    ]
+
+Note: Currently, test cases can be only written in "com.carousell.test.CarousellTest" class. 
+Improvements:
+1. Execute test from classes under the test package.
